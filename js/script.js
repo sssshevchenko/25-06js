@@ -1,11 +1,12 @@
 // @ts-nocheck
-import{
+import {
 	formSubmitHandler,
-	closeBtnHandler,
+	closeBtnClickHandler,
 	markContainer,
 	countTasks,
-	addTask
-} from './functions.js';
+	addTask,
+	checkBtnClickHandler
+}  from './functions.js';
 
 import {
 	formAddTask,
@@ -13,8 +14,8 @@ import {
 } from './vars.js';
 
 formAddTask.addEventListener('submit', formSubmitHandler);
-taskList.addEventListener('click', closeBtnHandler);
-taskList.addEventListener('click', checkBtnHandler);
+taskList.addEventListener('click', closeBtnClickHandler);
+taskList.addEventListener('click', checkBtnClickHandler);
 
 // read data
 for (let key in localStorage) {

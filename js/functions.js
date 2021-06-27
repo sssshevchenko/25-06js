@@ -1,6 +1,6 @@
-import{
-  taskListContainer,
-  taskList,
+import {
+	taskListContainer,
+	taskList,
 } from './vars.js';
 
 export function addTask(task) {
@@ -14,12 +14,16 @@ export function addTask(task) {
 	btnDelete.classList.add('btn-delete');
 	btnDelete.innerHTML = '&times;';
 
-  const btnCheck = document.createElement('button');
-  btnCheck.classList.add('btn-check')
+	const btnCheck = document.createElement('button');
+	btnCheck.classList.add('btn-check');
+
+	if (task.done) {
+		listItem.classList.add('completed');
+	}
 
 	taskList.appendChild(listItem);
 	listItem.appendChild(btnDelete);
-  listItem.appendChild(btnCheck);
+	listItem.appendChild(btnCheck);
 }
 
 export function markContainer() {
@@ -54,10 +58,11 @@ export function formSubmitHandler(event) {
 	markContainer();
 	countTasks();
 
+
 	this.reset();
 }
 
-export const closeBtnHandler = event => {
+export const closeBtnClickHandler = event => {
 	if (!event.target.classList.contains('btn-delete')) return;
 
 	// const parentNode = event.target.parentNode;
@@ -71,18 +76,17 @@ export const closeBtnHandler = event => {
 	countTasks();
 }
 
-export const checkBtnHandler = event => {
+export const checkBtnClickHandler = event => {
 	if (!event.target.classList.contains('btn-check')) return;
 
-	// const parentNode = event.target.parentNode;
-	const { parentNode } = event.target; // <li>
+	const { parentNode } = event.target;
 
 	const taskId = parentNode.getAttribute('data-id');
-	
-	parentNode.classList.toggle('completed');
-  const task = JSON.parse(localStorage.getItem(taskId));
-  task.done = !task.done;
-  localStorage.setItem(taskId, JSON.stringify(task));
 
-  countTasks();
+	parentNode.classList.toggle('completed');
+	const task = JSON.parse(localStorage.getItem(taskId));
+	task.done = !task.done;
+	localStorage.setItem(taskId, JSON.stringify(task));
+
+	countTasks();
 }
